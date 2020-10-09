@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${users.isEmpty()}">
+            <td colspan="2">No users</td>
+        </tr>
+        <tr th:each="user: ${users}">
+            <td><span th:text="${user.id}">Id</span></td>
+            <td><span th:text="${user.name}">Name</span></td>
+            <td><span th:text="${user.surname}">Surname</span></td>
+            <td><span th:text="${user.username}">Username</span></td>
+            <td><span th:text="${user.password}">Password</span></td>
+            <td><span th:text="${user.role}">Role</span></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
