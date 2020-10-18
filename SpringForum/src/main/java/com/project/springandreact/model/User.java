@@ -1,10 +1,13 @@
 package com.project.springandreact.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -12,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "user_table")
-public class User {//046252022
+public class User{//046252022
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_id")
@@ -33,7 +36,9 @@ public class User {//046252022
     private String password;
     @Column(name = "user_role")
     private String role;
+    @JsonManagedReference
     @Column(name = "user_posts")
     @OneToMany(mappedBy = "creator")
     private List<Post> postList;
+
 }

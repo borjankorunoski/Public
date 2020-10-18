@@ -7,17 +7,17 @@
     <title>Hello World</title>
 </head>
 <body>
+<form action="#" th:action="@{/}" th:object="${user}" method="post">
+    Name: <input type="text" name="name" id="name" th:value="*{name}"><br>
+    Surname: <input type="text" name="surname" id="surname" th:value="*{surname}"><br>
+    Email: <input type="text" name="email" id="email" th:value="*{email}"><br>
+    Age: <input type="text" name="age" id="age" th:value="*{age}"><br>
+    Username: <input type="text" name="username" id="username" th:value="*{username}"><br>
+    Password: <input type="password" name="password" id="password" th:value="*{password}"><br>
+    Role: <input type="text" name="role" id="role" th:value="*{role}"><br>
+    <input type="submit" name="submit" id="submit" value="SEND">
+</form>
 
-    <form action="#" th:action="@{/}" method="post" th:object="${user}">
-
-        name: <input type="text" name="name" th:value="*{name}"><br>
-        surname: <input type="text" name="surname" th:value="*{surname}"><br>
-        username: <input type="text" name="username" th:value="*{username}"><br>
-        password: <input type="password" name="password" th:value="*{password}"><br>
-        ROLE: <input type="radio" name="role" value="ROLE_ADMIN" th:field="*{role}" th:value="ROLE_ADMIN">ADMIN <input type="radio" name="role" value="ROLE_USER" th:field="*{role}" th:value="ROLE_USER">USER
-        <br>
-        <input type="submit">
-    </form>
-    <a href="/showlist">L I S T</a>
+</div>
 </body>
 </html>
