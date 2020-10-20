@@ -36,9 +36,12 @@ public class User{//046252022
     private String password;
     @Column(name = "user_role")
     private String role;
-    @JsonManagedReference
+    @JsonManagedReference(value = "user_posts_json")
     @Column(name = "user_posts")
     @OneToMany(mappedBy = "creator")
     private List<Post> postList;
-
+    @JsonManagedReference(value = "user_comments_json")
+    @Column(name = "user_comments")
+    @OneToMany(mappedBy = "commentator")
+    private List<Comment> commentList;
 }

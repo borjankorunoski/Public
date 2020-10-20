@@ -27,8 +27,12 @@ public class Post {
     private String paragraph;
     @Column(name = "post_date_time")
     private LocalDateTime dateTime;
-    @JsonBackReference
+    @JsonBackReference(value = "user_posts_json")
     @ManyToOne
     @JoinColumn(name = "post_creator")
     private User creator;
+    @JsonManagedReference(value = "post_comments")
+    @OneToMany(mappedBy = "postCommentedOn")
+    @Column(name = "post_replies")
+    List<Comment> postReplies;
 }

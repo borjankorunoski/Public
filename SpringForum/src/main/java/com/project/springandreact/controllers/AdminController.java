@@ -1,9 +1,12 @@
 package com.project.springandreact.controllers;
 
+import com.project.springandreact.model.Comment;
 import com.project.springandreact.model.Post;
 import com.project.springandreact.model.User;
+import com.project.springandreact.service.CommentService;
 import com.project.springandreact.service.PostService;
 import com.project.springandreact.service.UserService;
+import com.project.springandreact.service.impl.CommentServiceImpl;
 import com.project.springandreact.service.impl.PostServiceImpl;
 import com.project.springandreact.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +23,12 @@ public class AdminController {
     UserService userService;
     @Autowired
     PostService postService;
+    @Autowired
+    CommentService commentService;
     public AdminController(){
         userService= new UserServiceImpl();
         postService = new PostServiceImpl();
+        commentService= new CommentServiceImpl();
     }
     @GetMapping(value = "/user/{id}", produces = "application/json")
     public User getUser(@PathVariable("id") Long id){
@@ -93,6 +99,21 @@ public class AdminController {
     @DeleteMapping(value = "/deletepost/{id}")
     public void deletePost(@PathVariable("id")long id){
         postService.deletePost(id);
+    }
+
+    @GetMapping(value = "/allcomments", produces = "application/json")
+    public List<Comment> getComments(){
+        return commentService.getAllComments();
+    }
+    @PostMapping(value = "/addcomment/{id}", consumes = "application/json", produces = "application/json")
+    public String addComment(@RequestBody Comment comment, @PathVariable("id")long postId){
+        Comment tmp = comment;
+        User creator = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        tmp.setCommentator(creator);
+        tmp.setDateTime(LocalDateTime.now());
+        tmp.setPostCommentedOn(postService.getPost(postId));
+        commentService.addComment(tmp);
+        return String.valueOf((commentService.getComment(tmp.getId())).getId());
     }
 
 }
