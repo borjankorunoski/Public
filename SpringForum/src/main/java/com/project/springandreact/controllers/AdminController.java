@@ -19,16 +19,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
+
     UserService userService;
-    @Autowired
     PostService postService;
-    @Autowired
     CommentService commentService;
-    public AdminController(){
-        userService= new UserServiceImpl();
-        postService = new PostServiceImpl();
-        commentService= new CommentServiceImpl();
+    @Autowired
+    public void setUserService(UserServiceImpl userService){
+        this.userService=userService;
+    }
+    @Autowired
+    public void setUserService(PostServiceImpl postService){
+        this.postService=postService;
+    }
+    @Autowired
+    public void setCommentService(CommentServiceImpl commentService){
+        this.commentService=commentService;
     }
     @GetMapping(value = "/user/{id}", produces = "application/json")
     public User getUser(@PathVariable("id") Long id){

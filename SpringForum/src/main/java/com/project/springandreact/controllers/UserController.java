@@ -2,8 +2,10 @@ package com.project.springandreact.controllers;
 
 import com.project.springandreact.model.Post;
 import com.project.springandreact.model.User;
+import com.project.springandreact.service.CommentService;
 import com.project.springandreact.service.PostService;
 import com.project.springandreact.service.UserService;
+import com.project.springandreact.service.impl.CommentServiceImpl;
 import com.project.springandreact.service.impl.PostServiceImpl;
 import com.project.springandreact.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,15 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
     UserService userService;
-    @Autowired
     PostService postService;
-    public UserController(){
-        userService= new UserServiceImpl();
-        postService = new PostServiceImpl();
+    @Autowired
+    public void setUserService(UserServiceImpl userService){
+        this.userService=userService;
+    }
+    @Autowired
+    public void setUserService(PostServiceImpl postService){
+        this.postService=postService;
     }
     @GetMapping("/profile")
     public User me(){
